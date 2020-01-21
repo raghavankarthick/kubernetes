@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: my-np-service
+  labels: 
+    name: svc-label
+    type: back-end
+spec: 
+  type: NodePort
+  selector:
+    name: dep-label
+    type: back-end
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
+      nodePort: 30000

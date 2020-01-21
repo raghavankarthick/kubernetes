@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: httpd-dep
+  labels: 
+    name: dep-label
+    type: back-end
+spec: 
+  template: 
+    metadata:
+      name: httpdPod
+      labels:
+        name: dep-label
+        type: back-end
+    spec:
+      containers:
+        - name: httpd-demo
+          image: httpd
+      nodeSelector:
+        type: back-end
+        tier: front-end
+  replicas: 2
+  selector: 
+    matchLabels: 
+      name: dep-label
+      type: back-end
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: #Update Pods a certain number at a time
+      maxUnavailable: 1 # Total number of pods that can be unavailable at once
+
+
