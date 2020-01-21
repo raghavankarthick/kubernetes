@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nginx-rs
+  labels: 
+    name: rs-label
+    type: back-end
+spec: 
+  template: 
+    metadata:
+      name: nginx
+      labels:
+        name: rs-label
+        type: back-end
+    spec:
+      containers:
+        - name: nginx-demo
+          image: nginx
+      nodeSelector:
+        type: back-end
+        tier: front-end
+  replicas: 2
+  selector: 
+    matchLabels: 
+      name: rs-label
+      type: back-end
+
