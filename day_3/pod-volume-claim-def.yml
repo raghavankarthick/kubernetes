@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-volume-claim
+  labels:
+    name: pod-volume-claim
+spec:
+  volumes:
+    - name: myvclaim-v
+      persistentVolumeClaim:
+          claimName: myvclaim
+  containers:
+  - name: pod-volume-claim-container
+    image: nginx
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+    volumeMounts:
+      - mountPath: "/genesys"
+        name: myvclaim-v
