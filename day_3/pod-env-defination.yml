@@ -17,4 +17,3 @@ spec:
         value: "Hello from the environment"
       - name: Demo_Farewell
         value: "Such a sweet sorrow"
-      - containerPort: 8080
