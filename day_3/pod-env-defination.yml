@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-demo
+  labels:
+    name: env-demo
+spec:
+  containers:
+  - name: env-demo-container
+    image: gcr.io/google-samples/node-hello:1.0
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    env:
+      - name: Demo_Greeting
+        value: "Hello from the environment"
+      - name: Demo_Farewell
+        value: "Such a sweet sorrow"
+      - containerPort: 8080
