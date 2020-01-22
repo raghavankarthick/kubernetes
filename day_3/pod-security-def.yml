@@ -1,0 +1,34 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-pod-demo
+  labels:
+    name: security-pod-demo
+spec:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+  volumes:
+    - name: sec-ctx-vol
+      emptyDir: {}
+  containers:
+  - name: security-pod-demo-container
+    image: busybox
+    command:
+      - "sh"
+      - "-c"
+      - "sleep 1h"
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: <Port>
+    volumeMounts:
+    - name: sec-ctx-vol
+      mountPath: /data/demo
+    securityContext:
+      allowPrivilegeEscalation: false
+

@@ -1,0 +1,24 @@
+#kubectl create configmap game-config --from-file=game.properties
+#kubectl describe cm game-config
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-demo
+  labels:
+    name: configmap-demo
+spec:
+  containers:
+  - name: configmap-demo-container
+    image: k8s.gcr.io/busybox
+    command: ["/bin/sh","-c","env"]
+    envFrom:
+      - configMapRef:
+          name: game-config
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8080
+  restartPolicy: Never

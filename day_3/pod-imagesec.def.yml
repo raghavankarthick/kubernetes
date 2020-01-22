@@ -1,0 +1,20 @@
+# command to store the secret
+# kubectl create secret generic regcred --from-file=.dockerconfigjson=/root/.docker/config.json --type=kubernetes.io/dockerconfigjson
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-reg
+  labels:
+    name: private-reg
+spec:
+  containers:
+  - name: private-reg-container
+    image: raghavan/kubernetesdemo:1.2
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8080
+  imagePullSecrets:
+    - name: regcred #secret name that was stored in the kubernetes namespace
