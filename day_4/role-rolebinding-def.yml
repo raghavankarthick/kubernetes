@@ -20,7 +20,7 @@ metadata:
   name: read-pods
 subjects:
   - kind: ServiceAccount
-    name: Raghavan
+    name: raghavan
     apiGroup: rbac.authorization.k8s.io
 roleRef:
   apiGroup: rbac.authorization.k8s.io
